@@ -17,7 +17,7 @@ module.exports = {
     autoOpenBrowser: false, //是否自动打开浏览器
     errorOverlay: true, // 展示错误信息
     notifyOnErrors: true, // 错误通知
-    poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions- 通过传递 true 开启 polling，或者指定毫秒为单位进行轮询
+    poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions- 通过传递 true 开启 polling，或者指定毫秒为单位进行轮询 // Check for changes every second
 
     // {{#lint}}// Use Eslint Loader?
     // // If true, your code will be linted during bundling and
