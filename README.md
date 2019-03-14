@@ -1,3 +1,4 @@
+
 # vue-webpack-boilerplate
 
 > A full-featured Webpack setup with hot-reload, lint-on-save, unit testing & css extraction.
@@ -75,3 +76,6 @@ You can fork this repo to create your own boilerplate, and use it with `vue-cli`
 ``` bash
 vue init username/repo my-project
 ```
+
+--添加代码详细注释，增加对代码的理解和记忆--
+
