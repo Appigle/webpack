@@ -1,17 +1,20 @@
 'use strict'
-const path = require('path')
-const config = require('../config')
+const path = require('path') // NODE path处理工具
+const config = require('../config') // 不同开发环境的配置参数
+// Extract text from a bundle, or bundles, into a separate file. https://www.npmjs.com/package/extract-text-webpack-plugin 该插件的主要是为了抽离css样式,防止将样式打包在js中引起页面样式加载错乱的现象
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const packageConfig = require('../package.json')
+const packageConfig = require('../package.json') // 项目参数
 
+// 根据版本获取最后的资源路径
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
     ? config.build.assetsSubDirectory
     : config.dev.assetsSubDirectory
-
+  // 返回合并后的资源路径
   return path.posix.join(assetsSubDirectory, _path)
 }
 
+// 导出cssLoader的配置参数
 exports.cssLoaders = function (options) {
   options = options || {}
 
@@ -30,6 +33,7 @@ exports.cssLoaders = function (options) {
   }
 
   // generate loader string to be used with extract text plugin
+  // 通过额外的文本插件生成loader字符串
   function generateLoaders (loader, loaderOptions) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
 
@@ -44,7 +48,7 @@ exports.cssLoaders = function (options) {
 
     // Extract CSS when that option is specified
     // (which is the case during production build)
-    if (options.extract) {
+    if (options.extract) { //extract：isProduction 生产环境做css文件分割
       return ExtractTextPlugin.extract({
         use: loaders,
         fallback: 'vue-style-loader'
@@ -67,6 +71,7 @@ exports.cssLoaders = function (options) {
 }
 
 // Generate loaders for standalone style files (outside of .vue)
+// 生成的样式加载loader
 exports.styleLoaders = function (options) {
   const output = []
   const loaders = exports.cssLoaders(options)
@@ -78,11 +83,13 @@ exports.styleLoaders = function (options) {
       use: loader
     })
   }
-
   return output
 }
 
+// 错误通知回调
 exports.createNotifierCallback = () => {
+  // Send cross platform native notifications using Node.js https://www.npmjs.com/package/node-notifier
+  // 使用node发送跨平台的通知
   const notifier = require('node-notifier')
 
   return (severity, errors) => {
